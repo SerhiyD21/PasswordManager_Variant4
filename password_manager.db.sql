@@ -1,0 +1,23 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Clients" (
+	"id"	INTEGER,
+	"name"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Passwords" (
+	"id"	INTEGER,
+	"client_id"	INTEGER,
+	"site_id"	INTEGER,
+	"password"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("client_id") REFERENCES "Clients"("id"),
+	FOREIGN KEY("site_id") REFERENCES "Sites"("id")
+);
+CREATE TABLE IF NOT EXISTS "Sites" (
+	"id"	INTEGER,
+	"name"	TEXT NOT NULL,
+	"url"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+COMMIT;
